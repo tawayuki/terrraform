@@ -29,7 +29,7 @@ module ec2-sg {
   }
 }
 module "iam_role" {
-  source = "./modules/IAMrole"
+  source = "./modules/iamrole"
   instance_profile_name = "my-instance-role"
   iam_role_name             = "tawa-role"
   iam_role_assume_role_policy = {
