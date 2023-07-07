@@ -8,7 +8,3 @@ resource "aws_iam_role" "iam-role" {
   }
 }
 
-resource "aws_iam_instance_profile" "test-profile" {
-  name = "test_profile"
-  role = aws_iam_role.iam-role.name
-}
