@@ -10,10 +10,10 @@ variable "public_subnet_id" {
 variable "sg_id" {
     type = string
 }
-#variable "iam_instance_profile" {
-#    type = string
-#}
-#variable "iam_role_arn" {
-#  type = string
-#}
+variable "iam_instance_profile" {
+    type = string
+}
+variable "iam_role_arn" {
+  type = string
+}
 
