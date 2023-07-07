@@ -7,4 +7,7 @@ resource "aws_iam_role" "iam-role" {
     Name = var.iam_role_name
   }
 }
-
+resource "aws_iam_instance_profile" "ec2-role" {
+  name = "test_profile"
+  role = aws_iam_role.iam-role.name
+}
