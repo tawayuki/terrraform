@@ -4,5 +4,8 @@ resource "aws_instance" "server" {
   subnet_id       = var.public_subnet_id
   security_groups = [var.sg_id]
   iam_instance_profile = var.iam_instance_profile
+  tags = {
+   Name = "tawa-ec2"
+ }
 }
 
