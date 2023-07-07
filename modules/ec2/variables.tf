@@ -13,7 +13,4 @@ variable "sg_id" {
 variable "iam_instance_profile" {
     type = string
 }
-variable "iam_role_arn" {
-  type = string
-}
 
