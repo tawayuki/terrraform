@@ -15,7 +15,7 @@ module "ec2" {
   instance_type          = "t2.micro"
   public_subnet_id       = module.network.public_subnet_id
   sg_id            = module.ec2-sg.sg_id
-#  iam_instance_profile   = module.iam_role.iam_role_name
+  iam_instance_profile   = module.iam_role.iam_role_name
 }
 
 module ec2-sg {
@@ -28,24 +28,24 @@ module ec2-sg {
     cidr_blocks = ["10.0.0.0/16"]
   }
 }
-#module "iam_role" {
-#  source = "./modules/IAMrole"
-#  instance_profile_name = "my-instance-role"
-#  iam_role_name             = "tawa-role"
-#  iam_role_assume_role_policy = {
-#    Version = "2012-10-17"
-#    Statement = [
-#      {
-#        Effect    = "Allow"
-#        Principal = {
-#          Service = "ec2.amazonaws.com"
-#        }
-#        Action = "sts:AssumeRole"
-#      }
-#    ]
-#  }
-#  iam_role_policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
-#}
+module "iam_role" {
+  source = "./modules/IAMrole"
+  instance_profile_name = "my-instance-role"
+  iam_role_name             = "tawa-role"
+  iam_role_assume_role_policy = {
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect    = "Allow"
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+        Action = "sts:AssumeRole"
+      }
+    ]
+  }
+  iam_role_policy_arn = "arn:aws:iam::aws:policy/AmazonS3FullAccess"
+}
 
 
 
