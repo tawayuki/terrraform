@@ -6,7 +6,7 @@ output "iam_role_name" {
   value = aws_iam_role.iam-role.name
 }
 
-output "intanceprofile" {
+output "instanceprofile" {
   value = aws_iam_instance_profile.ec2-role.name
 }
 
