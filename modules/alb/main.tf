@@ -18,7 +18,7 @@ resource "aws_alb_target_group" "alb_tgw" {
     port                = var.lb_target_config.port
     protocol            = var.lb_target_config.protocol
     timeout             = 5
-    unhealthy_threshold = 1
+    unhealthy_threshold = 2
     matcher             = 200
   }
 }
@@ -31,12 +31,13 @@ resource "aws_alb_target_group_attachment" "alb" {
 }
 
 resource "aws_alb_listener" "alb" {
-  load_balancer_arn = "${aws_lb.alb.arn}"
+  load_balancer_arn = aws_lb.alb.arn
   port              = var.lb_listener_config.port
   protocol          = var.lb_listener_config.protocol
 
-    type             = "forward"
-    target_group_arn = aws_alb_target_group.alb_tgw.arn
+default_action {
+  type             = "forward"
+  target_group_arn = aws_alb_target_group.alb_tgw.arn
   }
 }
 

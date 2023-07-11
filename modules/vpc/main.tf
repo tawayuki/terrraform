@@ -15,7 +15,7 @@ resource "aws_subnet" "public_subnet" {
 resource "aws_subnet" "public_subnet2" {
   vpc_id                  = aws_vpc.vpc.id
   cidr_block              = var.cidr_public2
-  availability_zone       = var.az1
+  availability_zone       = var.az2
 }
 
 resource "aws_subnet" "private_subnet1" {
@@ -44,11 +44,11 @@ resource "aws_route_table" "public_rtb" {
 }
 
 resource "aws_route_table_association" "rt_assoc" {
-  subnet_id      = "${aws_subnet.public_subnet.id}"
+  subnet_id      = aws_subnet.public_subnet.id
   route_table_id = aws_route_table.public_rtb.id
 }
 resource "aws_route_table_association" "rt_assoc2" {
-  subnet_id      = "${aws_subnet.public_subnet2.id}"
+  subnet_id      = aws_subnet.public_subnet2.id
   route_table_id = aws_route_table.public_rtb.id
 }
 
@@ -57,11 +57,11 @@ resource "aws_route_table" "private_rtb" {
 }
 
 resource "aws_route_table_association" "private_rt_assoc" {
-  subnet_id      = "${aws_subnet.private_subnet1.id}"
+  subnet_id      = aws_subnet.private_subnet1.id
   route_table_id = aws_route_table.private_rtb.id
 }
 resource "aws_route_table_association" "private_rt_assoc2" {
-  subnet_id      = "${aws_subnet.private_subnet2.id}"
+  subnet_id      = aws_subnet.private_subnet2.id
   route_table_id = aws_route_table.private_rtb.id
 }
 
