@@ -56,7 +56,7 @@ module alb_sg {
     cidr_blocks = ["153.122.166.254/32"]
   }
 }
-module lb {
+module alb {
   source = "./modules/alb"
   security_groups = module.alb_sg.alb_sg_id
   target_id      =  [module.ec2.instance_id]
