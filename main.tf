@@ -52,7 +52,7 @@ module alb_sg {
     name        = "alb-sg"
     vpc_id      = module.network.vpc_id
     protocol    = "tcp"
-    port        = [443]
+    port        = [80]
     cidr_blocks = ["153.122.166.254/32"]
   }
 }
