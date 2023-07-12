@@ -81,5 +81,38 @@ module alb {
     instance_id = module.ec2.instance_id
   }
 }
+module "db_subnet_group" {
+  source = "./modules/db_subnet_group"
+
+  name       = "tawa-main"
+  subnet_ids = [module.network.private_subnet1, module.network.private_subnet2]
+}
+
+module rds_sg {
+  source = "./modules/securitygroup_db"
+  db_sg_config = {
+    name        = "rds-sg"
+    vpc_id      = module.network.vpc_id
+    protocol    = "tcp"
+    port        = [3306]
+    cidr_blocks = ["10.0.0.0/16"]
+  }
+}
+module "rds_instance" {
+  source = "./modules/rds"
+  allocated_storage    = 10
+  name              = "mydb"
+  engine               = "mysql"
+  engine_version       = "8.0.32"
+  instance_class       = "db.t3.micro"
+  username             = "foo"
+  password             = "foobarbaz"
+  parameter_group_name = "default.mysql8.0"
+  skip_final_snapshot  = true
+  db_subnet_group_name = module.db_subnet_group.db_subnet_group_name
+  identifier           = "tawa"
+  multi_az                   = true
+  vpc_security_group_ids = module.rds_sg.db_sg_id
+}
 
 
