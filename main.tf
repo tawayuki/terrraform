@@ -114,5 +114,9 @@ module "rds_instance" {
   multi_az                   = true
   vpc_security_group_ids = module.rds_sg.db_sg_id
 }
-
+module "ssl" {
+  source = "./modules/ssl"
+  certificate_body = file("/ssl/server.crt") # SSL証明書
+  private_key      = file("/ssl/server.key") # 秘密鍵
+}
 
